@@ -18,19 +18,31 @@ export default class highlightedText extends Component {
     text: '',
     subtext: [0, 0]
   }
-
+  componentDidMount() {
+    this.setState(
+      {text: test.FirstModule,}
+    );
+  }
   render (){
     const {subtext: [start, end], text} = this.state;
+
     const selected = text.substring(start, end);
     return (
       <View style = {styles.container}>
-        <Text style = {styles.welcome}>
-          {test.FirstModule}
-        </Text>
         <TextInput style = {styles.input}
           onSelectionChange = {this.process}
-          onChangeText = {(text) => this.setState({text})}
-        />
+          onChangeText = {({text}) => this.setState({text})}
+          multiline = {true}
+          editable={false}
+        >
+        <Text style = {styles.welcome}
+          selectable = {true}
+
+        >
+          {test.FirstModule}
+        </Text>
+        </TextInput>
+        
         <Text style = {styles.result}>
           {selected}
         </Text>
@@ -52,7 +64,7 @@ export default class highlightedText extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: 50,
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -61,9 +73,9 @@ var styles = StyleSheet.create({
     margin: 20,
   },
   input: {
-    width: 200,
-    height: 40,
-    borderColor: 'red',
+    width: 300,
+    height: 300,
+    borderColor: 'white',
     borderWidth: 1,
     alignSelf: 'center'
   },
